@@ -1,0 +1,45 @@
+{
+    "name": "van-ons/laravel-translations-sync",
+    "description": "A Laravel package that synchronizes translations with a provider.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VanOns\\LaravelTranslationsSync\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Van Ons",
+            "email": "opensource@van-ons.nl"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "google/apiclient": "^2.17"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "orchestra/testbench": "^8.27",
+        "phpstan/phpstan": "^1.12"
+    },
+    "scripts": {
+        "fix": "vendor/bin/php-cs-fixer fix",
+        "analyse": "vendor/bin/phpstan analyse"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "VanOns\\LaravelTranslationsSync\\LaravelTranslationsSyncServiceProvider"
+            ]
+        },
+        "aliases": {
+            "LaravelTranslationsSync": "VanOns\\LaravelTranslationsSync\\Facades\\LaravelTranslationsSync"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
+}
