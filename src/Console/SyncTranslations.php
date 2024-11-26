@@ -66,12 +66,16 @@ class SyncTranslations extends Command
             'Update Sync Provider',
             'Translate',
             'Translate Provider',
+            'Base Locale',
+            'Locales',
         ], [
             [
                 $this->sync->getName(),
                 $this->option('retrieve-only') ? 'No' : 'Yes',
                 $this->translate ? 'Yes' : 'No',
                 $this->translate?->getName() ?? '-',
+                LaravelTranslationsSync::getBaseLocale(),
+                implode(', ', LaravelTranslationsSync::getLocales()),
             ],
         ], 'box');
 
@@ -120,6 +124,7 @@ class SyncTranslations extends Command
      */
     protected function getAllTranslations(): void
     {
+        /** @var Collection $allTranslations */
         $allTranslations = $this->providerTranslations
             ->merge($this->localTranslations)
             // Base collection contains the target translations, so in case of double entries the target entry

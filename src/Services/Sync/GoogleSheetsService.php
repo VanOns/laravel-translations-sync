@@ -214,25 +214,35 @@ class GoogleSheetsService extends BaseSyncService
 
     public function parseAllTranslations(Collection $translations, Collection $localTranslations): Collection
     {
+        // Retrieve all local translations for all configured locales.
+        $allLocalTranslations = collect(LaravelTranslationsSync::getLocales())
+            ->mapWithKeys(fn ($locale) => [$locale => LaravelTranslationsSync::getTranslationsForLocale($locale)]);
+
         return $translations
-            // Also add array items for languages that don't have a value yet in order to clear cells
-            // in the spreadsheet that need to be cleared.
+            // Make sure all cells are filled, either with an empty string or a value.
             ->map(
-                fn ($translation) => array_merge(
-                    $this->headings->slice(1)
-                        ->mapWithKeys(fn ($heading) => [$heading => ''])
-                        ->toArray(),
-                    $translation
-                )
-            )
-            // In case the base translation is not available, add it.
-            ->map(
-                fn ($translation) => array_merge(
-                    $translation,
-                    empty($translation[$this->baseTranslationCellValue])
-                        ? [$this->baseTranslationCellValue => $localTranslations->firstWhere($this->keyCellValue, '=', $translation[$this->keyCellValue])[$this->baseTranslationCellValue]]
-                        : []
-                )
+                function ($translation) use ($allLocalTranslations) {
+                    // Also add array items for languages that don't have a value yet in order to clear cells
+                    // in the spreadsheet that need to be cleared.
+                    $translation = array_merge(
+                        $this->headings->slice(1)
+                            ->mapWithKeys(fn ($heading) => [$heading => ''])
+                            ->toArray(),
+                        $translation
+                    );
+
+                    $key = $translation[$this->getBaseKey()];
+                    [$filename, $translationKey] = explode('::', $key, 2);
+
+                    // If a value is empty, and the locale is allowed, fill it with the local value.
+                    foreach ($translation as $heading => $value) {
+                        if (empty($value) && $heading !== $this->getBaseKey() && LaravelTranslationsSync::localeIsAllowed($heading)) {
+                            $translation[$heading] = $allLocalTranslations[strtolower($heading)][$filename][$translationKey] ?? '';
+                        }
+                    }
+
+                    return $translation;
+                }
             )
             // Replace the array keys by indexes, because that's how the API expects it.
             ->map(

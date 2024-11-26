@@ -7,13 +7,31 @@ use Illuminate\Support\Facades\File;
 class LaravelTranslationsSync
 {
     /**
+     * Get the configured base locale.
+     */
+    public function getBaseLocale(): string
+    {
+        return config('translations-sync.base_locale');
+    }
+
+    /**
+     * Get all configured locales.
+     */
+    public function getLocales(): array
+    {
+        $locales = array_map('strtolower', config('translations-sync.locales', []));
+
+        sort($locales);
+
+        return $locales;
+    }
+
+    /**
      * Check if a locale is allowed.
      */
     public function localeIsAllowed(string $key): bool
     {
-        $keys = array_map('strtolower', config('translations-sync.locales'));
-
-        return in_array(strtolower($key), $keys);
+        return in_array(strtolower($key), $this->getLocales());
     }
 
     /**
@@ -21,7 +39,7 @@ class LaravelTranslationsSync
      */
     public function getAllTranslations(): array
     {
-        $strings = $this->getTranslationsForLocale(config('translations-sync.base_locale'));
+        $strings = $this->getTranslationsForLocale($this->getBaseLocale());
 
         ksort($strings);
 
