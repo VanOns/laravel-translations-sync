@@ -1,57 +1,72 @@
-# Package skeleton
+<p align="center"><img src="art/social-card.png" alt="Social card of Laravel Translations Sync"></p>
 
-This package is meant to give you a default setup for building a new
-laravel package.
+# Laravel Translations Sync
 
-What's included:
+<!-- BADGES -->
 
-- [PHP-CS-Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) setup
-- [PHPSTAN](https://phpstan.org/) setup
-- Default service provider and layout to get started with.
+A Laravel package that synchronizes translations with a provider.
 
-## Usage
+## Quick start
 
-- Clone this package
-- Review `composer.json`:
-  - Change the name property, description, license.
-  - Change the namespace and service provider classname in the `autoload` and
-  `extra` properties.
-- Remove from the `src/SkeletonServiceProvider` what you won't be using.
-- Change the namespace in the `src` directory's files.
+### Installation
 
-## Development
+```bash
+# Composer
+composer require van-ons/laravel-translations-sync
 
-To develop your package inside an existing Laravel project, add the location
-of the package in a `repositories` property to the `composer.json` file of the
-parent project. If your package would be inside a `packages` directory inside
-the parent project:
+# npm
+npm install @van-ons/laravel-translations-sync
 
-```json
-"repositories": [
-    {
-      "type": "path",
-      "url": "packages/skeleton"
-    }
-  ]
+# etc.
 ```
 
-Then require the package: `composer require van-ons/skeleton`.
+### Usage
 
-Laravel >8 will throw a version constraint error. You can fix this by doing
-one of the following:
-
-1. Change the `minimum-stability` property to `dev` in your `composer.json`
-file.
-2. add a version property to your package's `composer.json` file:
-
-```json
-{
-  "version": "1.0.0",
-}
+```php
+// How do you use this package?
+// Keep it brief, but give enough information to get started.
+// Extensive documentation can be provided in the docs folder.
 ```
 
-## Documentation and alternatives
+## Documentation
 
-- [Laravel documentation](https://laravel.com/docs/11.x/packages)
-- [LaravelPackage.com](https://www.laravelpackage.com/)
-- [Spatie's package skeleton](https://github.com/spatie/package-skeleton-laravel/)
+Please see the [documentation] for detailed information about installation and usage.
+
+## Contributing
+
+Please see [contributing] for more information about how you can contribute.
+
+## Changelog
+
+Please see [changelog] for more information about what has changed recently.
+
+## Upgrading
+
+Please see [upgrading] for more information about how to upgrade.
+
+## Security
+
+Please see [security] for more information about how we deal with security.
+
+## Credits
+
+We would like to thank the following contributors for their contributions to this project:
+
+- [All Contributors][all-contributors]
+
+## License
+
+The scripts and documentation in this project are released under the [MIT License][license].
+
+---
+
+<p align="center"><a href="https://van-ons.nl/" target="_blank"><img src="https://opensource.van-ons.nl/files/cow.png" width="50" alt="Logo of Van Ons"></a></p>
+
+[documentation]: docs
+[contributing]: CONTRIBUTING.md
+[changelog]: CHANGELOG.md
+[upgrading]: UPGRADING.md
+[security]: SECURITY.md
+[email]: mailto:opensource@van-ons.nl
+[all-contributors]: ../../contributors
+[license]: LICENSE.md
