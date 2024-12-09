@@ -60,35 +60,6 @@ class GoogleSheetsService extends BaseSyncService
 
     protected Collection $headings;
 
-    public function __construct()
-    {
-        // TODO: Do we want this?
-        //        if (empty($this->spreadsheetId)) {
-        //            throw new RuntimeException('Missing required variable "spreadsheetId"');
-        //        }
-        //        if (empty($this->sheetName)) {
-        //            throw new RuntimeException('Missing required variable "sheetName"');
-        //        }
-        //        if (empty($this->firstColumn)) {
-        //            throw new RuntimeException('Missing required variable "firstColumn"');
-        //        }
-        //        if (empty($this->lastColumn)) {
-        //            throw new RuntimeException('Missing required variable "lastColumn"');
-        //        }
-        //        if (empty($this->headingRow)) {
-        //            throw new RuntimeException('Missing required variable "headingRow"');
-        //        }
-        //        if (empty($this->firstRow)) {
-        //            throw new RuntimeException('Missing required variable "firstRow"');
-        //        }
-        //        if (empty($this->keyCellValue)) {
-        //            throw new RuntimeException('Missing required variable "keyCellValue"');
-        //        }
-        //        if (empty($this->baseTranslationCellValue)) {
-        //            throw new RuntimeException('Missing required variable "baseTranslationCellValue"');
-        //        }
-    }
-
     /**
      * @throws SyncException
      */
