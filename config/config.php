@@ -9,8 +9,15 @@ return [
     |
     */
 
-    'base_locale' => env('LTS_BASE_LOCALE', config('app.locale')),
+    /**
+     * The locale to use as base for all translations.
+     */
+    'base_locale' => config('app.locale'),
 
+    /**
+     * The locales that should be synced. If a locale is found, but it is not
+     * in this list, it will be ignored.
+     */
     'locales' => [
         config('app.locale'),
     ],
@@ -22,24 +29,35 @@ return [
     |
     */
 
+    /**
+     * The provider to synchronize translations with.
+     */
     'sync_provider' => env('LTS_SYNC_PROVIDER', 'google_sheets'),
 
+    /**
+     * The configurations for the available synchronization providers.
+     */
     'sync_providers' => [
+
+        /**
+         * Google Sheets configuration.
+         */
         'google_sheets' => [
+
             /**
-             * Google Sheets API configuration
+             * Path to the authentication configuration file.
              */
             'auth_config' => env('LTS_GOOGLE_SHEETS_AUTH_CONFIG'),
 
             /**
-             * Google Sheets API scopes
+             * Scopes for the Google Sheets API.
              */
             'scopes' => [
                 Google_Service_Sheets::SPREADSHEETS,
             ],
 
             /**
-             * Google Sheets API configurations
+             * Configuration for the sheet.
              */
             'sheet' => [
                 'spreadsheet_id' => env('LTS_GOOGLE_SHEETS_SPREADSHEET_ID'),
@@ -51,7 +69,9 @@ return [
                 'key_cell_value' => env('LTS_GOOGLE_SHEETS_KEY_CELL_VALUE'),
                 'base_translation_cell_value' => env('LTS_GOOGLE_SHEETS_BASE_TRANSLATION_CELL_VALUE'),
             ],
+
         ],
+
     ],
 
     /*
@@ -61,10 +81,21 @@ return [
     |
     */
 
+    /**
+     * The provider to use for translations.
+     */
     'translate_provider' => env('LTS_TRANSLATE_PROVIDER', 'deepl'),
 
+    /**
+     * The configurations for the available translation providers.
+     */
     'translate_providers' => [
+
+        /**
+         * Deepl configuration.
+         */
         'deepl' => [
+
             /**
              * Deepl API key
              */
@@ -74,7 +105,9 @@ return [
              * Deepl API url
              */
             'api_url' => env('LTS_DEEPL_API_URL'),
+
         ],
+
     ],
 
 ];

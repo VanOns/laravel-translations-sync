@@ -4,29 +4,45 @@
 
 <!-- BADGES -->
 
-A Laravel package that synchronizes translations with a provider.
+A Laravel package that synchronizes translations between local and remote.
 
 ## Quick start
 
 ### Installation
 
+Install the package via Composer:
+
 ```bash
-# Composer
 composer require van-ons/laravel-translations-sync
-
-# npm
-npm install @van-ons/laravel-translations-sync
-
-# etc.
 ```
+
+Then, publish the configuration file:
+
+```bash
+php artisan vendor:publish --provider="VanOns\LaravelTranslationsSync\LaravelTranslationsSyncServiceProvider" --tag="translations-sync-config"
+```
+
+Next, set `base_locale` and `locales` in the configuration file to match your project's configuration. The other settings
+can be configured using environment variables.
 
 ### Usage
 
-```php
-// How do you use this package?
-// Keep it brief, but give enough information to get started.
-// Extensive documentation can be provided in the docs folder.
-```
+You can execute the synchronization command by running:
+
+```bash
+php artisan lang:sync
+````
+
+> [!NOTE]
+> Before any destructive action is taken, you will be asked to confirm the action.
+
+The command supports the following flags:
+
+| Flag                    | Description                                                   |
+|-------------------------|---------------------------------------------------------------|
+| `-R`, `--retrieve-only` | Only write the translations locally, don't update the remote  |
+| `-T`, `--translate`     | Translate missing translations using the translation provider |
+| `-F`, `--force`         | Skip the confirmation dialog                                  |
 
 ## Documentation
 

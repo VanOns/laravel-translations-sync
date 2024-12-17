@@ -20,8 +20,8 @@ class SyncTranslations extends Command
      * @var string
      */
     protected $signature = 'lang:sync
-                            {--R|retrieve-only : Only write the translations to the files, don\'t update sync provider}
-                            {--T|translate     : Translate missing translations using translate provider}
+                            {--R|retrieve-only : Only write the translations locally, don\'t update the remote}
+                            {--T|translate     : Translate missing translations using the translation provider}
                             {--F|force         : Skip the confirmation dialog}';
 
     /**
