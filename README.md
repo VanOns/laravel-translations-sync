@@ -10,10 +10,10 @@ A Laravel package that synchronizes translations between local and remote.
 
 ### Installation
 
-Install the package via Composer:
+Install the package via Composer as dev dependency:
 
 ```bash
-composer require van-ons/laravel-translations-sync
+composer require van-ons/laravel-translations-sync --dev
 ```
 
 Then, publish the configuration file:
