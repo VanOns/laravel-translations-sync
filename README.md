@@ -56,7 +56,7 @@ We would like to thank the following contributors for their contributions to thi
 
 ## License
 
-The scripts and documentation in this project are released under the [MIT License][license].
+The scripts and documentation in this project are released under the [GPL-3.0 License][license].
 
 ---
 

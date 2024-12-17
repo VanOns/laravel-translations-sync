@@ -2,7 +2,7 @@
     "name": "van-ons/laravel-translations-sync",
     "description": "A Laravel package that synchronizes translations with a provider.",
     "type": "library",
-    "license": "MIT",
+    "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
             "VanOns\\LaravelTranslationsSync\\": "src/"
