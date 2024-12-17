@@ -30,13 +30,6 @@ class LaravelTranslationsSyncServiceProvider extends ServiceProvider
             return new LaravelTranslationsSync();
         });
 
-//        $this->app->singleton(DeeplService::class, function () {
-//            return new DeeplService(
-//                apiKey: config('translations-sync.translate_providers.deepl.api_key'),
-//                apiUrl: config('translations-sync.translate_providers.deepl.api_url')
-//            );
-//        });
-
         $this->mergeConfigFrom(
             __DIR__ . '/../config/config.php',
             'translations-sync'
