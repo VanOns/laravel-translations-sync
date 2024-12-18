@@ -19,7 +19,7 @@ composer require van-ons/laravel-translations-sync --dev
 Then, publish the configuration file:
 
 ```bash
-php artisan vendor:publish --provider="VanOns\LaravelTranslationsSync\LaravelTranslationsSyncServiceProvider" --tag="translations-sync-config"
+php artisan vendor:publish --tag="translations-sync-config"
 ```
 
 Next, set `base_locale` and `locales` in the configuration file to match your project's configuration. The other settings
