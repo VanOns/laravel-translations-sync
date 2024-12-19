@@ -77,4 +77,12 @@ class LaravelTranslationsSync
 
         return $strings;
     }
+
+    /**
+     * Return the separator used in the translation keys.
+     */
+    public function getSeparator(): string
+    {
+        return config('translations-sync.separator', '.');
+    }
 }

@@ -110,4 +110,16 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Separator
+    |--------------------------------------------------------------------------
+    |
+    | The separator to use for splitting keys and nested values. Set this to a
+    | value that is not used in your translation keys or values.
+    |
+    */
+
+    'separator' => '::',
+
 ];

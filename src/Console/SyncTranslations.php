@@ -31,6 +31,8 @@ class SyncTranslations extends Command
      */
     protected $description = 'Sync all translations with the configured provider';
 
+    protected string $separator;
+
     protected BaseSyncService $sync;
 
     protected ?BaseTranslateService $translate = null;
@@ -48,6 +50,8 @@ class SyncTranslations extends Command
      */
     public function handle(): void
     {
+        $this->separator = LaravelTranslationsSync::getSeparator();
+
         $this->sync = app(SyncManager::class)
             ->withCommand($this)
             ->getService()
@@ -100,7 +104,7 @@ class SyncTranslations extends Command
     protected function getLocalTranslations(): void
     {
         $translations = collect(LaravelTranslationsSync::getAllTranslations())
-            ->mapWithKeys(fn ($translation, $key) => Arr::dot($translation, $key . '::'))
+            ->mapWithKeys(fn ($translation, $key) => lts_array_dot($translation, $key . $this->separator, $this->separator))
             ->filter()
             ->mapWithKeys([$this->sync, 'mapSourceTranslation'])
             ->values();
@@ -181,12 +185,12 @@ class SyncTranslations extends Command
             // Reduce the translations to an array keyed by locale, filename, translation key and value.
             ->reduce(function (array $carry, array $translations) {
                 $key = $translations[$this->sync->getBaseKey()];
-                [$filename, $translationKey] = explode('::', $key, 2);
+                [$filename, $translationKey] = explode($this->separator, $key, 2);
 
                 unset($translations[$this->sync->getBaseKey()]);
 
                 foreach ($translations as $locale => $value) {
-                    Arr::set($carry[strtolower($locale)][$filename], $translationKey, $value);
+                    lts_array_set($carry[strtolower($locale)][$filename], $translationKey, $value, $this->separator);
                 }
 
                 return $carry;

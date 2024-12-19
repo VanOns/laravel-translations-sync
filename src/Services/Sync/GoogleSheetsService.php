@@ -7,13 +7,12 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use VanOns\LaravelTranslationsSync\Exceptions\SyncException;
 use VanOns\LaravelTranslationsSync\Facades\LaravelTranslationsSync;
-use VanOns\LaravelTranslationsSync\Services\Translate\BaseTranslateService;
 
 class GoogleSheetsService extends BaseSyncService
 {
     protected static string $name = 'Google Sheets';
 
-    protected ?BaseTranslateService $translate;
+    protected string $separator;
 
     protected GoogleSheetsAdapter $sheets;
 
@@ -65,6 +64,8 @@ class GoogleSheetsService extends BaseSyncService
      */
     public function setUp(): static
     {
+        $this->separator = LaravelTranslationsSync::getSeparator();
+
         $this->sheets = new GoogleSheetsAdapter();
 
         $config = config('translations-sync.sync_providers.google_sheets.sheet');
@@ -203,12 +204,12 @@ class GoogleSheetsService extends BaseSyncService
                     );
 
                     $key = $translation[$this->getBaseKey()];
-                    [$filename, $translationKey] = explode('::', $key, 2);
+                    [$filename, $translationKey] = explode($this->separator, $key, 2);
 
                     // If a value is empty, and the locale is allowed, fill it with the local value.
                     foreach ($translation as $heading => $value) {
                         if (empty($value) && $heading !== $this->getBaseKey() && LaravelTranslationsSync::localeIsAllowed($heading)) {
-                            $translation[$heading] = $allLocalTranslations[strtolower($heading)][$filename][$translationKey] ?? '';
+                            $translation[$heading] = lts_array_get($allLocalTranslations[strtolower($heading)][$filename] ?? [], $translationKey, '', $this->separator);
                         }
                     }
 
