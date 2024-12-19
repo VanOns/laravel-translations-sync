@@ -138,7 +138,7 @@ class SyncTranslations extends Command
             ->filter(
                 fn ($translation) => $this->sync->filterTargetTranslation($translation, $this->localTranslations)
             )
-            ->sortBy($this->sync->getBaseKey())
+            ->sortBy($this->sync->getBaseKey(), SORT_NATURAL | SORT_FLAG_CASE)
             ->values();
 
         $allTranslations = $this->sync->parseAllTranslations($allTranslations, $this->localTranslations);
@@ -206,7 +206,10 @@ class SyncTranslations extends Command
             }
 
             foreach ($files as $filename => $lines) {
-                if (str_ends_with($filename, '.json')) {
+                // Sort the lines by key, alphabetically.
+                ksort($lines, SORT_NATURAL | SORT_FLAG_CASE);
+
+                if ($filename === 'json') {
                     $this->writeJson($locale, $lines);
                 }
                 if (str_ends_with($filename, '.php')) {

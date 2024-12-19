@@ -41,7 +41,7 @@ class LaravelTranslationsSync
     {
         $strings = $this->getTranslationsForLocale($this->getBaseLocale());
 
-        ksort($strings);
+        ksort($strings, SORT_NATURAL | SORT_FLAG_CASE);
 
         return $strings;
     }
@@ -57,20 +57,20 @@ class LaravelTranslationsSync
         foreach (File::files(lang_path($locale)) as $file) {
             $name = basename($file);
             $strings[$name] = require $file;
-            ksort($strings[$name]);
+            ksort($strings[$name], SORT_NATURAL | SORT_FLAG_CASE);
         }
 
         // Then also look for a JSON file with the same name as the locale.
         // From the locale (aa_BB), it first tries to find a JSON file with the BB part, then with the aa part.
         $jsonParts = explode('_', $locale);
-        foreach (array_reverse($jsonParts) as $part) {
+        foreach ([$locale, ...array_reverse($jsonParts)] as $part) {
             $filename = strtolower($part) . '.json';
             $jsonPath = lang_path($filename);
 
             if (File::exists($jsonPath)) {
                 $json = File::json($jsonPath);
-                $strings[$filename] = $json;
-                ksort($strings[$filename]);
+                $strings['json'] = $json;
+                ksort($strings['json'], SORT_NATURAL | SORT_FLAG_CASE);
                 break;
             }
         }
