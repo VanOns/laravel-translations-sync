@@ -19,11 +19,13 @@
     ],
     "require": {
         "php": "^8.0",
-        "google/apiclient": "^2.17"
+        "google/apiclient": "^2.17",
+        "illuminate/console": "^9.0|^10.0|^11.0",
+        "illuminate/support": "^9.0|^10.0|^11.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.64",
-        "orchestra/testbench": "^8.27",
+        "orchestra/testbench": "^7.0|^8.17|^9.0",
         "phpstan/phpstan": "^1.12"
     },
     "scripts": {
