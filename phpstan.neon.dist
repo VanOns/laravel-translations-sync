@@ -1,6 +1,5 @@
 parameters:
     level: 5
     paths:
-        - database
+        - config
         - src
-        - routes
