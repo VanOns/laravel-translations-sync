@@ -54,10 +54,12 @@ class LaravelTranslationsSync
         $strings = [];
 
         // Load all translation files from the locale's directory.
-        foreach (File::files(lang_path($locale)) as $file) {
-            $name = basename($file);
-            $strings[$name] = require $file;
-            ksort($strings[$name], SORT_NATURAL | SORT_FLAG_CASE);
+        if (File::exists(lang_path($locale))) {
+            foreach (File::files(lang_path($locale)) as $file) {
+                $name = basename($file);
+                $strings[$name] = require $file;
+                ksort($strings[$name], SORT_NATURAL | SORT_FLAG_CASE);
+            }
         }
 
         // Then also look for a JSON file with the same name as the locale.
