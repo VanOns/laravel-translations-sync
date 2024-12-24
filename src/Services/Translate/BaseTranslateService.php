@@ -21,81 +21,49 @@ abstract class BaseTranslateService
         return static::$name;
     }
 
-    abstract protected function translate(string $text, string $targetLanguage): ?string;
-
     public function translateAll(Collection $translations, Collection $translationKeys, string $baseTranslationKey, string $baseKey): Collection
     {
         if (!$this->isEnabled()) {
             return $translations;
         }
 
-        $this->info('Starting translating...');
+        $translatable = $this->buildTranslatable($translations, $translationKeys, $baseTranslationKey, $baseKey);
 
-        $progress = $this->command->getOutput()->createProgressBar(count($translations));
-        $progress->start();
+        return $this->processTranslatable($translations, $translatable);
+    }
 
-        $translateCache = [];
-
-        foreach ($translations as $translationIndex => $values) {
-            $baseKeyIndex = $translationKeys->search($baseKey);
-
-            // Set the base translation, which will be needed to translate the other languages.
-            $baseLanguageIndex = $translationKeys->search($baseTranslationKey);
-            $baseTranslation = $values[$baseLanguageIndex] ?? null;
-
-            if (empty($baseTranslation)) {
-                continue;
-            }
-
-            $preparedBaseTranslation = $this->beforeTranslating($baseTranslation);
-
-            foreach ($values as $valueIndex => $value) {
-                // Don't translate the translation key.
-                if ($valueIndex === $baseKeyIndex) {
-                    continue;
-                }
-
-                $language = $translationKeys[$valueIndex] ?? null;
-
-                // Preserve the value if the language is empty, or not allowed.
-                if (empty($language) || !LaravelTranslationsSync::localeIsAllowed($language)) {
-                    continue;
-                }
-
-                // Translate if we have a language and no value.
-                if (empty($value)) {
-                    $translated = $translateCache[$language][$baseTranslation] ?? null;
-
-                    if (empty($translated)) {
-                        $translated = $this->translate($preparedBaseTranslation, $language);
-                        $translated = $this->afterTranslating($translated, $baseTranslation);
-
-                        if (!isset($translateCache[$language])) {
-                            $translateCache[$language] = [];
-                        }
-
-                        $translateCache[$language][$baseTranslation] = $translated;
-                    }
-
-                    $translations[$translationIndex][$valueIndex] = $translated;
-                }
-            }
-
-            $progress->advance();
-        }
-
-        $progress->finish();
-
-        $this->info('Translating completed.');
-
+    /**
+     * Build the translatable array.
+     */
+    protected function buildTranslatable(Collection $translations, Collection $translationKeys, string $baseTranslationKey, string $baseKey): Collection
+    {
         return $translations;
     }
 
+    /**
+     * Process the translatable array.
+     */
+    protected function processTranslatable(Collection $translations, Collection $translatable): Collection
+    {
+        return $translations;
+    }
+
+    /**
+     * Translate the text.
+     */
+    abstract protected function translate(string|array $text, string $targetLanguage): string|array|null;
+
+    /**
+     * Process the value before translating.
+     */
     public function beforeTranslating(string $value): string
     {
         return $value;
     }
 
+    /**
+     * Process the value after translating.
+     */
     public function afterTranslating(string $value, string $original): string
     {
         return $value;
