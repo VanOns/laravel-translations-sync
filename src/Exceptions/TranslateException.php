@@ -6,23 +6,23 @@ use Exception;
 
 class TranslateException extends Exception
 {
-    public static function providerNotFound(string $provider): static
+    public static function providerNotFound(string $provider): self
     {
-        return new static("No valid translate provider found with key \"$provider\"");
+        return new self("No valid translate provider found with key \"{$provider}\"");
     }
 
-    public static function providerNotConfigured(): static
+    public static function providerNotConfigured(): self
     {
-        return new static('The translate provider is not configured properly');
+        return new self('The translate provider is not configured properly');
     }
 
-    public static function translateFailed(?string $error = null): static
+    public static function translateFailed(?string $error = null): self
     {
         $message = 'Failed to translate text';
         if ($error) {
             $message .= ': ' . $error;
         }
 
-        return new static($message);
+        return new self($message);
     }
 }

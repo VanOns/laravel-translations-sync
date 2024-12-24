@@ -4,7 +4,6 @@ namespace VanOns\LaravelTranslationsSync;
 
 use Illuminate\Support\ServiceProvider;
 use VanOns\LaravelTranslationsSync\Console\SyncTranslations;
-use VanOns\LaravelTranslationsSync\Services\Translate\DeeplService;
 
 class LaravelTranslationsSyncServiceProvider extends ServiceProvider
 {

@@ -68,8 +68,8 @@ class LaravelTranslationsSync
             $jsonPath = lang_path($filename);
 
             if (File::exists($jsonPath)) {
-                $json = File::json($jsonPath);
-                $strings['json'] = $json;
+                $json = File::get($jsonPath);
+                $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
                 ksort($strings['json'], SORT_NATURAL | SORT_FLAG_CASE);
                 break;
             }

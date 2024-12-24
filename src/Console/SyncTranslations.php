@@ -3,7 +3,6 @@
 namespace VanOns\LaravelTranslationsSync\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use VanOns\LaravelTranslationsSync\Facades\LaravelTranslationsSync;

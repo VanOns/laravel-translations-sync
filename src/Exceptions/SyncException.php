@@ -6,18 +6,18 @@ use Exception;
 
 class SyncException extends Exception
 {
-    public static function providerNotFound(string $provider): static
+    public static function providerNotFound(string $provider): self
     {
-        return new static("No valid sync provider found with key \"$provider\"");
+        return new self("No valid sync provider found with key \"{$provider}\"");
     }
 
-    public static function providerNotConfigured(): static
+    public static function providerNotConfigured(): self
     {
-        return new static('The sync provider is not configured properly');
+        return new self('The sync provider is not configured properly');
     }
 
-    public static function setupFailed(string $reason): static
+    public static function setupFailed(string $reason): self
     {
-        return new static("Setup failed: $reason");
+        return new self("Setup failed: {$reason}");
     }
 }
