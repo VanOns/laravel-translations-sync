@@ -4,6 +4,7 @@ namespace VanOns\LaravelTranslationsSync\Services\Translate;
 
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use VanOns\LaravelTranslationsSync\Exceptions\TranslateException;
@@ -14,6 +15,8 @@ class DeeplService extends BaseTranslateService
     protected static string $name = 'DeepL';
 
     protected static string $valueParseRegex = '/(:\w+|%s)/';
+
+    protected static string $cacheKey = 'translations-sync::deepl::';
 
     protected ?string $apiKey = null;
 
@@ -192,7 +195,7 @@ class DeeplService extends BaseTranslateService
                 sleep(2);
             }
 
-            $this->saveCache($language, $translateCache);
+            $this->saveCache($language, $translateCache[$language]);
         }
 
         $this->info('Translating completed.');
@@ -201,33 +204,92 @@ class DeeplService extends BaseTranslateService
     }
 
     /**
-     * Load the cache from a JSON file.
+     * Load the cache.
      */
     protected function loadCache(string $language): array
+    {
+        if (!LaravelTranslationsSync::cacheEnabled()) {
+            return [];
+        }
+
+        $language = strtolower($language);
+
+        return match (LaravelTranslationsSync::getCacheDriver()) {
+            'file' => $this->loadFileCache($language),
+            default => $this->loadDefaultCache($language),
+        };
+    }
+
+    /**
+     * Load the cache from the file driver.
+     */
+    protected function loadFileCache(string $language): array
     {
         // Make sure the cache path exists.
         File::ensureDirectoryExists(storage_path('app/translations'));
 
-        // Load the current translations from the cache.
-        if (File::exists(storage_path("app/translations/{$language}.json"))) {
-            $currentFile = File::get(storage_path("app/translations/{$language}.json"));
-
-            return json_decode($currentFile, true, flags: JSON_THROW_ON_ERROR);
+        if (!File::exists(storage_path("app/translations/{$language}.json"))) {
+            return [];
         }
 
-        return [];
+        $currentFile = File::get(storage_path("app/translations/{$language}.json"));
+
+        try {
+            return json_decode($currentFile, true, flags: JSON_THROW_ON_ERROR);
+        } catch (\JsonException) {
+            $this->warn('Failed to load cache from JSON file.');
+            return [];
+        }
     }
 
     /**
-     * Save the cache to a JSON file.
+     * Load the cache from the default driver.
      */
-    protected function saveCache(string $language, array $translateCache = []): void
+    protected function loadDefaultCache(string $language): array
     {
-        $newJson = $translateCache[$language];
+        return Cache::get(static::$cacheKey . $language, []);
+    }
 
-        ksort($newJson, SORT_NATURAL | SORT_FLAG_CASE);
+    /**
+     * Save the cache.
+     */
+    protected function saveCache(string $language, array $cache = []): void
+    {
+        if (!LaravelTranslationsSync::cacheEnabled()) {
+            return;
+        }
 
-        File::put(storage_path("app/translations/{$language}.json"), json_encode($newJson, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+        $language = strtolower($language);
+
+        ksort($cache, SORT_NATURAL | SORT_FLAG_CASE);
+
+        match (LaravelTranslationsSync::getCacheDriver()) {
+            'file' => $this->saveFileCache($language, $cache),
+            default => $this->saveDefaultCache($language, $cache),
+        };
+    }
+
+    /**
+     * Save the cache to the file driver.
+     */
+    protected function saveFileCache(string $language, array $cache): void
+    {
+        try {
+            $json = json_encode($cache, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
+        } catch (\JsonException) {
+            $this->warn('Failed to save cache to JSON file.');
+            return;
+        }
+
+        File::put(storage_path("app/translations/{$language}.json"), $json);
+    }
+
+    /**
+     * Save the cache to the default driver.
+     */
+    protected function saveDefaultCache(string $language, array $cache): void
+    {
+        Cache::put('translations-sync::deepl::' . $language, $cache, now()->addHours(24));
     }
 
     /**

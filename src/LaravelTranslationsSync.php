@@ -87,4 +87,20 @@ class LaravelTranslationsSync
     {
         return config('translations-sync.separator', '.');
     }
+
+    /**
+     * Check if the cache is enabled.
+     */
+    public function cacheEnabled(): bool
+    {
+        return (bool) config('translations-sync.cache_enabled', true);
+    }
+
+    /**
+     * Return the cache driver to use.
+     */
+    public function getCacheDriver(): string
+    {
+        return config('translations-sync.cache_driver', 'default');
+    }
 }

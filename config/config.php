@@ -4,39 +4,49 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Locales
+    | Base Locale
     |--------------------------------------------------------------------------
+    |
+    | The locale to use as base for all translations.
     |
     */
 
-    /**
-     * The locale to use as base for all translations.
-     */
     'base_locale' => config('app.locale'),
 
-    /**
-     * The locales that should be synced. If a locale is found, but it is not
-     * in this list, it will be ignored.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Locales
+    |--------------------------------------------------------------------------
+    |
+    | The locales that should be synced. If a locale is found, but it is not
+    | in this list, it will be ignored.
+    |
+    */
+
     'locales' => [
         config('app.locale'),
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Sync Providers
+    | Sync Provider
     |--------------------------------------------------------------------------
+    |
+    | The provider to synchronize translations with.
     |
     */
 
-    /**
-     * The provider to synchronize translations with.
-     */
     'sync_provider' => env('LTS_SYNC_PROVIDER', 'google_sheets'),
 
-    /**
-     * The configurations for the available synchronization providers.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Sync Providers
+    |--------------------------------------------------------------------------
+    |
+    | The configurations for the available synchronization providers.
+    |
+    */
+
     'sync_providers' => [
 
         /**
@@ -76,19 +86,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Translate Providers
+    | Translate Provider
     |--------------------------------------------------------------------------
+    |
+    | The provider to use for translations.
     |
     */
 
-    /**
-     * The provider to use for translations.
-     */
     'translate_provider' => env('LTS_TRANSLATE_PROVIDER', 'deepl'),
 
-    /**
-     * The configurations for the available translation providers.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Translate Providers
+    |--------------------------------------------------------------------------
+    |
+    | The configurations for the available translation providers.
+    |
+    */
+
     'translate_providers' => [
 
         /**
@@ -121,5 +136,33 @@ return [
     */
 
     'separator' => '::',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Enabled
+    |--------------------------------------------------------------------------
+    |
+    | Enabling the cache will store the translations in the cache for a certain
+    | amount of time. This will reduce the amount of requests to the translation
+    | provider.
+    |
+    */
+
+    'cache_enabled' => env('LTS_CACHE_ENABLED', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Driver
+    |--------------------------------------------------------------------------
+    |
+    | The cache driver to use for storing the translations.
+    |
+    | Supported drivers:
+    | - "default" (users Laravel's default cache driver)
+    | - "file"
+    |
+    */
+
+    'cache_driver' => env('LTS_CACHE_DRIVER', 'default'),
 
 ];

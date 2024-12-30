@@ -71,6 +71,8 @@ class SyncTranslations extends Command
             'Translate Provider',
             'Base Locale',
             'Locales',
+            'Cache Enabled',
+            'Cache Driver',
         ], [
             [
                 $this->sync->getName(),
@@ -79,6 +81,8 @@ class SyncTranslations extends Command
                 $this->translate?->getName() ?? '-',
                 LaravelTranslationsSync::getBaseLocale(),
                 implode(', ', LaravelTranslationsSync::getLocales()),
+                LaravelTranslationsSync::cacheEnabled() ? 'Yes' : 'No',
+                LaravelTranslationsSync::cacheEnabled() ? LaravelTranslationsSync::getCacheDriver() : '-',
             ],
         ], 'box');
 
