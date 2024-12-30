@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Base Locale
+    | Base locale
     |--------------------------------------------------------------------------
     |
     | The locale to use as base for all translations.
@@ -29,7 +29,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sync Provider
+    | Sync provider
     |--------------------------------------------------------------------------
     |
     | The provider to synchronize translations with.
@@ -40,7 +40,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sync Providers
+    | Sync providers
     |--------------------------------------------------------------------------
     |
     | The configurations for the available synchronization providers.
@@ -86,7 +86,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Translate Provider
+    | Translate provider
     |--------------------------------------------------------------------------
     |
     | The provider to use for translations.
@@ -97,7 +97,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Translate Providers
+    | Translate providers
     |--------------------------------------------------------------------------
     |
     | The configurations for the available translation providers.
@@ -127,7 +127,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Translate Wait Seconds
+    | Translate wait seconds
     |--------------------------------------------------------------------------
     |
     | The amount of seconds to wait between each translation request.
@@ -151,7 +151,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache Enabled
+    | Cache enabled
     |--------------------------------------------------------------------------
     |
     | Enabling the cache will store the translations in the cache for a certain
@@ -164,7 +164,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache Driver
+    | Cache driver
     |--------------------------------------------------------------------------
     |
     | The cache driver to use for storing the translations.

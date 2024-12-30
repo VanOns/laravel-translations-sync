@@ -1,8 +1,13 @@
 {
     "name": "van-ons/laravel-translations-sync",
-    "description": "A Laravel package that synchronizes translations with a provider.",
+    "description": "A package that synchronizes translations between your Laravel project and a provider.",
     "type": "library",
     "license": "GPL-3.0-or-later",
+    "keywords": [
+        "laravel",
+        "translations",
+        "sync"
+    ],
     "autoload": {
         "files": [
             "src/helpers.php"

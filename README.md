@@ -4,13 +4,11 @@
 
 <!-- BADGES -->
 
-A Laravel package that synchronizes translations between local and remote.
+A package that synchronizes translations between your Laravel project and a provider.
 
 ## Quick start
 
-### Installation
-
-Install the package via Composer as dev dependency:
+First, install the package via Composer as dev dependency:
 
 ```bash
 composer require van-ons/laravel-translations-sync --dev
@@ -22,8 +20,7 @@ Then, publish the configuration file:
 php artisan vendor:publish --tag="translations-sync-config"
 ```
 
-Next, set `base_locale` and `locales` in the configuration file to match your project's configuration. The other settings
-can be configured using environment variables.
+Next, follow the [configuration steps](docs/installation.md#configuration) to set up the configuration file and providers.
 
 ### Usage
 
@@ -33,16 +30,7 @@ You can execute the synchronization command by running:
 php artisan lang:sync
 ````
 
-> [!NOTE]
-> Before any destructive action is taken, you will be asked to confirm the action.
-
-The command supports the following flags:
-
-| Flag                    | Description                                                   |
-|-------------------------|---------------------------------------------------------------|
-| `-R`, `--retrieve-only` | Only write the translations locally, don't update the remote  |
-| `-T`, `--translate`     | Translate missing translations using the translation provider |
-| `-F`, `--force`         | Skip the confirmation dialog                                  |
+See [Basic usage](docs/basic-usage.md) for more information.
 
 ## Documentation
 
@@ -78,7 +66,7 @@ The scripts and documentation in this project are released under the [GPL-3.0 Li
 
 <p align="center"><a href="https://van-ons.nl/" target="_blank"><img src="https://opensource.van-ons.nl/files/cow.png" width="50" alt="Logo of Van Ons"></a></p>
 
-[documentation]: docs
+[documentation]: docs/README.md
 [contributing]: CONTRIBUTING.md
 [changelog]: CHANGELOG.md
 [upgrading]: UPGRADING.md
