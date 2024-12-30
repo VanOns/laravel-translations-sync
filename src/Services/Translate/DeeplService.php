@@ -151,7 +151,7 @@ class DeeplService extends BaseTranslateService
         $translateCache = [];
 
         foreach ($translatable as $language => $translatables) {
-            $this->info("Translating translations for $language...");
+            $this->info("Translating translations for {$language}...");
 
             $translateCache[$language] = array_merge(
                 $this->loadCache($language),
@@ -241,9 +241,9 @@ class DeeplService extends BaseTranslateService
         try {
             $cache = json_decode($currentFile, true, flags: JSON_THROW_ON_ERROR);
 
-            $this->info("Cache loaded from file: $filePath");
+            $this->info("Cache loaded from file: {$filePath}");
         } catch (\JsonException) {
-            $this->warn("Failed to load cache from file: $filePath");
+            $this->warn("Failed to load cache from file: {$filePath}");
 
             $cache = [];
         }
@@ -288,13 +288,13 @@ class DeeplService extends BaseTranslateService
         try {
             $json = json_encode($cache, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
         } catch (\JsonException) {
-            $this->warn("Failed to save cache to file: $filePath");
+            $this->warn("Failed to save cache to file: {$filePath}");
             return;
         }
 
         File::put(storage_path($filePath), $json);
 
-        $this->info("Cache saved to file: $filePath");
+        $this->info("Cache saved to file: {$filePath}");
     }
 
     /**

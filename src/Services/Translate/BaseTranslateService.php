@@ -3,7 +3,6 @@
 namespace VanOns\LaravelTranslationsSync\Services\Translate;
 
 use Illuminate\Support\Collection;
-use VanOns\LaravelTranslationsSync\Facades\LaravelTranslationsSync;
 use VanOns\LaravelTranslationsSync\Services\Traits\HasCommand;
 
 abstract class BaseTranslateService
