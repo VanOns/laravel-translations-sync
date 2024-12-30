@@ -12,6 +12,13 @@ abstract class BaseTranslateService
 
     protected static string $name = '';
 
+    protected int $waitSeconds = 2;
+
+    public function __construct()
+    {
+        $this->waitSeconds = config('translations-sync.translate_wait_seconds', 2);
+    }
+
     abstract public function setUp(): static;
 
     abstract public function isEnabled(): bool;

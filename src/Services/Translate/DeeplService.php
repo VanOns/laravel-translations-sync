@@ -191,8 +191,10 @@ class DeeplService extends BaseTranslateService
                     $translations[$currentTranslation['translation_index']][$currentTranslation['value_index']] = $processedTranslation;
                 }
 
-                // Sleep for 2 seconds to prevent rate limiting.
-                sleep(2);
+                if ($this->waitSeconds > 0) {
+                    // Sleep to prevent rate limiting.
+                    sleep($this->waitSeconds);
+                }
             }
 
             $this->saveCache($language, $translateCache[$language]);
@@ -225,21 +227,28 @@ class DeeplService extends BaseTranslateService
      */
     protected function loadFileCache(string $language): array
     {
+        $filePath = "app/translations/{$language}.json";
+
         // Make sure the cache path exists.
         File::ensureDirectoryExists(storage_path('app/translations'));
 
-        if (!File::exists(storage_path("app/translations/{$language}.json"))) {
+        if (!File::exists(storage_path($filePath))) {
             return [];
         }
 
-        $currentFile = File::get(storage_path("app/translations/{$language}.json"));
+        $currentFile = File::get(storage_path($filePath));
 
         try {
-            return json_decode($currentFile, true, flags: JSON_THROW_ON_ERROR);
+            $cache = json_decode($currentFile, true, flags: JSON_THROW_ON_ERROR);
+
+            $this->info("Cache loaded from file: $filePath");
         } catch (\JsonException) {
-            $this->warn('Failed to load cache from JSON file.');
-            return [];
+            $this->warn("Failed to load cache from file: $filePath");
+
+            $cache = [];
         }
+
+        return $cache;
     }
 
     /**
@@ -274,14 +283,18 @@ class DeeplService extends BaseTranslateService
      */
     protected function saveFileCache(string $language, array $cache): void
     {
+        $filePath = "app/translations/{$language}.json";
+
         try {
             $json = json_encode($cache, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
         } catch (\JsonException) {
-            $this->warn('Failed to save cache to JSON file.');
+            $this->warn("Failed to save cache to file: $filePath");
             return;
         }
 
-        File::put(storage_path("app/translations/{$language}.json"), $json);
+        File::put(storage_path($filePath), $json);
+
+        $this->info("Cache saved to file: $filePath");
     }
 
     /**
@@ -289,7 +302,7 @@ class DeeplService extends BaseTranslateService
      */
     protected function saveDefaultCache(string $language, array $cache): void
     {
-        Cache::put('translations-sync::deepl::' . $language, $cache, now()->addHours(24));
+        Cache::forever('translations-sync::deepl::' . $language, $cache);
     }
 
     /**
