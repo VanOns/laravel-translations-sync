@@ -11,7 +11,7 @@ class LaravelTranslationsSyncServiceProvider extends ServiceProvider
     {
         $this->publishes(
             paths: [
-                __DIR__ . '/../config/config.php' => config_path('translations-sync.php'),
+                __DIR__ . '/../config/translations-sync.php' => config_path('translations-sync.php'),
             ],
             groups: 'translations-sync-config'
         );
@@ -30,7 +30,7 @@ class LaravelTranslationsSyncServiceProvider extends ServiceProvider
         });
 
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php',
+            __DIR__ . '/../config/translations-sync.php',
             'translations-sync'
         );
     }
