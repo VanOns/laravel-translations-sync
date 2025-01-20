@@ -2,7 +2,10 @@
 
 # Laravel Translations Sync
 
-<!-- BADGES -->
+[![Latest Version on Github](https://img.shields.io/github/release/VanOns/laravel-translations-sync.svg?style=flat-square)](https://github.com/VanOns/laravel-translations-sync/releases)
+[![Total Downloads](https://img.shields.io/packagist/dt/van-ons/laravel-translations-sync.svg?style=flat-square)](https://packagist.org/packages/van-ons/laravel-translations-sync)
+[![Github issues](https://img.shields.io/github/issues/VanOns/laravel-translations-sync?style=flat-square)](https://github.com/VanOns/laravel-translations-sync/issues)
+[![License](https://img.shields.io/github/license/VanOns/laravel-translations-sync?style=flat-square)](https://github.com/VanOns/laravel-translations-sync/blob/main/LICENSE.md)
 
 A package that synchronizes translations between your Laravel project and a provider.
 
