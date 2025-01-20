@@ -1,8 +1,8 @@
+<p align="center"><img src="../../art/google-sheets-example.png" alt="Example of Google Sheets"></p>
+
 # Google Sheets
 
 You can sync the translations with [Google Sheets](https://sheets.google.com).
-
-<p align="center"><img src="../../art/google-sheets-example.png" alt="Example of Google Sheets"></p>
 
 ## Setup
 
