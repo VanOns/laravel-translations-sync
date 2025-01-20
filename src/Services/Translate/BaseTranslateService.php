@@ -3,6 +3,7 @@
 namespace VanOns\LaravelTranslationsSync\Services\Translate;
 
 use Illuminate\Support\Collection;
+use VanOns\LaravelTranslationsSync\Facades\LaravelTranslationsSync;
 use VanOns\LaravelTranslationsSync\Services\Traits\HasCommand;
 
 abstract class BaseTranslateService
@@ -11,10 +12,13 @@ abstract class BaseTranslateService
 
     protected static string $name = '';
 
+    protected string $separator;
+
     protected int $waitSeconds = 2;
 
     public function __construct()
     {
+        $this->separator = LaravelTranslationsSync::getSeparator();
         $this->waitSeconds = config('translations-sync.translate_wait_seconds', 2);
     }
 

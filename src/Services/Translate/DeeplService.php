@@ -94,7 +94,7 @@ class DeeplService extends BaseTranslateService
         $progress = $this->command->getOutput()->createProgressBar(count($translations));
         $progress->start();
 
-        $translatable = collect();
+        $translatable = [];
 
         foreach ($translations as $translationIndex => $values) {
             $baseKeyIndex = $translationKeys->search($baseKey);
@@ -124,12 +124,12 @@ class DeeplService extends BaseTranslateService
 
                 // Translate if we have a language and no value.
                 if (empty($value)) {
-                    $translatable[$language][$baseTranslation] = [
+                    lts_array_set($translatable, "{$language}{$this->separator}{$baseTranslation}", [
                         'translation_index' => $translationIndex,
                         'value_index' => $valueIndex,
                         'base_translation' => $baseTranslation,
                         'prepared_translation' => $preparedBaseTranslation,
-                    ];
+                    ], $this->separator);
                 }
             }
 
@@ -138,7 +138,7 @@ class DeeplService extends BaseTranslateService
 
         $progress->finish();
 
-        return $translatable;
+        return collect($translatable);
     }
 
     /**
