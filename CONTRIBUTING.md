@@ -17,7 +17,7 @@ the [discussions][discussions]. If your issue does not exist already, go ahead a
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [GPL-3.0 License][license].
+By contributing, you agree that your contributions will be licensed under the [MIT License][license].
 
 ## Resources
 
