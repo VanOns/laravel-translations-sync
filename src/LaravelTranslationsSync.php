@@ -41,7 +41,7 @@ class LaravelTranslationsSync
     {
         $strings = $this->getTranslationsForLocale($this->getBaseLocale());
 
-        ksort($strings, SORT_NATURAL | SORT_FLAG_CASE);
+        ksort($strings, SORT_STRING | SORT_FLAG_CASE);
 
         return $strings;
     }
@@ -58,7 +58,7 @@ class LaravelTranslationsSync
             foreach (File::files(lang_path($locale)) as $file) {
                 $name = basename($file);
                 $strings[$name] = require $file;
-                ksort($strings[$name], SORT_NATURAL | SORT_FLAG_CASE);
+                ksort($strings[$name], SORT_STRING | SORT_FLAG_CASE);
             }
         }
 
@@ -72,7 +72,7 @@ class LaravelTranslationsSync
             if (File::exists($jsonPath)) {
                 $json = File::get($jsonPath);
                 $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
-                ksort($strings['json'], SORT_NATURAL | SORT_FLAG_CASE);
+                ksort($strings['json'], SORT_STRING | SORT_FLAG_CASE);
                 break;
             }
         }
