@@ -63,7 +63,7 @@ class SyncTranslations extends Command
                 ?->setUp();
         }
 
-        $this->info('Syncing translations with the following configuration:');
+        $this->line('Syncing translations with the following configuration:');
         $this->table([
             'Sync Provider',
             'Update Sync Provider',
@@ -89,7 +89,7 @@ class SyncTranslations extends Command
         if ($this->option('force')) {
             $this->warn('"force" flag passed, skipping confirmation dialog');
         } elseif (!$this->confirm('Do you wish to continue?')) {
-            $this->info('Aborted');
+            $this->line('Aborted');
             return;
         }
 

@@ -89,7 +89,7 @@ class DeeplService extends BaseTranslateService
      */
     protected function buildTranslatable(Collection $translations, Collection $translationKeys, string $baseTranslationKey, string $baseKey): Collection
     {
-        $this->info('Starting translating...');
+        $this->line('Starting translating...');
 
         $progress = $this->command->getOutput()->createProgressBar(count($translations));
         $progress->start();
@@ -146,12 +146,12 @@ class DeeplService extends BaseTranslateService
      */
     protected function processTranslatable(Collection $translations, Collection $translatable): Collection
     {
-        $this->info('Sending translations to provider...');
+        $this->line("\nSending translations to provider...");
 
         $translateCache = [];
 
         foreach ($translatable as $language => $translatables) {
-            $this->info("Translating translations for {$language}...");
+            $this->line("Translating translations for {$language}...");
 
             $translateCache[$language] = array_merge(
                 $this->loadCache($language),
@@ -239,7 +239,7 @@ class DeeplService extends BaseTranslateService
         try {
             $cache = json_decode($currentFile, true, flags: JSON_THROW_ON_ERROR);
 
-            $this->info("Cache loaded from file: {$filePath}");
+            $this->line("Cache loaded from file: {$filePath}");
         } catch (\JsonException) {
             $this->warn("Failed to load cache from file: {$filePath}");
 

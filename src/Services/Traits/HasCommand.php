@@ -13,6 +13,11 @@ trait HasCommand
         $this->command = $command;
     }
 
+    protected function line(string $message): void
+    {
+        $this->command->line(sprintf('[%s] %s', $this->getName(), $message));
+    }
+
     protected function info(string $message): void
     {
         $this->command->info(sprintf('[%s] %s', $this->getName(), $message));
