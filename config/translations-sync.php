@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Base locale
+    | Base Locale
     |--------------------------------------------------------------------------
     |
     | The locale to use as base for all translations.
@@ -29,7 +29,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sync provider
+    | Sync Provider
     |--------------------------------------------------------------------------
     |
     | The provider to synchronize translations with.
@@ -40,7 +40,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sync providers
+    | Sync Providers
     |--------------------------------------------------------------------------
     |
     | The configurations for the available synchronization providers.
@@ -86,7 +86,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Translate provider
+    | Translate Provider
     |--------------------------------------------------------------------------
     |
     | The provider to use for translations.
@@ -97,7 +97,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Translate providers
+    | Translate Providers
     |--------------------------------------------------------------------------
     |
     | The configurations for the available translation providers.
@@ -107,18 +107,11 @@ return [
     'translate_providers' => [
 
         /**
-         * Deepl configuration.
+         * DeepL configuration.
          */
         'deepl' => [
 
-            /**
-             * Deepl API key
-             */
             'api_key' => env('LTS_DEEPL_API_KEY'),
-
-            /**
-             * Deepl API url
-             */
             'api_url' => env('LTS_DEEPL_API_URL'),
 
         ],
@@ -127,7 +120,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Translate wait seconds
+    | Translate Wait Seconds
     |--------------------------------------------------------------------------
     |
     | The amount of seconds to wait between each translation request.
@@ -151,7 +144,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache enabled
+    | Cache Enabled
     |--------------------------------------------------------------------------
     |
     | Enabling the cache will store the translations in the cache for a certain
@@ -164,13 +157,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache driver
+    | Cache Driver
     |--------------------------------------------------------------------------
     |
     | The cache driver to use for storing the translations.
     |
     | Supported drivers:
-    | - "default" (users Laravel's default cache driver)
+    | - "default" (uses Laravel's default cache driver)
     | - "file"
     |
     */
