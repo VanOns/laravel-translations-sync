@@ -193,7 +193,7 @@ class SyncTranslations extends Command
                 unset($translations[$this->sync->getBaseKey()]);
 
                 foreach ($translations as $locale => $value) {
-                    lts_array_set($carry[strtolower($locale)][$filename], $translationKey, $value, $this->separator);
+                    lts_array_set($carry[$locale][$filename], $translationKey, $value, $this->separator);
                 }
 
                 return $carry;

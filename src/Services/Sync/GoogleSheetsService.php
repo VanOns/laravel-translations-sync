@@ -209,7 +209,7 @@ class GoogleSheetsService extends BaseSyncService
                     // If a value is empty, and the locale is allowed, fill it with the local value.
                     foreach ($translation as $heading => $value) {
                         if (empty($value) && $heading !== $this->getBaseKey() && LaravelTranslationsSync::localeIsAllowed($heading)) {
-                            $translation[$heading] = lts_array_get($allLocalTranslations[strtolower($heading)][$filename] ?? [], $translationKey, '', $this->separator);
+                            $translation[$heading] = lts_array_get($allLocalTranslations[$heading][$filename] ?? [], $translationKey, '', $this->separator);
                         }
                     }
 

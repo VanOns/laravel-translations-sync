@@ -214,8 +214,6 @@ class DeeplService extends BaseTranslateService
             return [];
         }
 
-        $language = strtolower($language);
-
         return match (LaravelTranslationsSync::getCacheDriver()) {
             'file' => $this->loadFileCache($language),
             default => $this->loadDefaultCache($language),
@@ -267,8 +265,6 @@ class DeeplService extends BaseTranslateService
         if (!LaravelTranslationsSync::cacheEnabled()) {
             return;
         }
-
-        $language = strtolower($language);
 
         ksort($cache, SORT_STRING | SORT_FLAG_CASE);
 
