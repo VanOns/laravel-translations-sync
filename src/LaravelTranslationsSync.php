@@ -62,19 +62,11 @@ class LaravelTranslationsSync
             }
         }
 
-        // Then also look for a JSON file with the same name as the locale.
-        // From the locale (aa_BB), it first tries to find a JSON file with the BB part, then with the aa part.
-        $jsonParts = explode('_', $locale);
-        foreach ([$locale, ...array_reverse($jsonParts)] as $part) {
-            $filename = strtolower($part) . '.json';
-            $jsonPath = lang_path($filename);
-
-            if (File::exists($jsonPath)) {
-                $json = File::get($jsonPath);
-                $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
-                ksort($strings['json'], SORT_STRING | SORT_FLAG_CASE);
-                break;
-            }
+        $jsonPath = lang_path("$locale.json");
+        if (File::exists($jsonPath)) {
+            $json = File::get($jsonPath);
+            $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
+            ksort($strings['json'], SORT_STRING | SORT_FLAG_CASE);
         }
 
         return $strings;
