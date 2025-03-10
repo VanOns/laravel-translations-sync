@@ -6,10 +6,10 @@ Before installing and using the package, please ensure your environment meets th
 
 The package has been tested and verified to work with the following versions:
 
-| Package | Version |
-|---------|---------|
-| PHP     | \>= 8.0 |
-| Laravel | \>= 9   |
+| Dependency | Minimum version |
+|------------|-----------------|
+| PHP        | 8.0             |
+| Laravel    | 9.0             |
 
 ## Compatibility
 
