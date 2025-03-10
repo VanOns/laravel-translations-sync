@@ -11,6 +11,15 @@ A package that synchronizes translations between your Laravel project and a prov
 
 ## Quick start
 
+### Requirements
+
+| Dependency | Minimum version |
+|------------|-----------------|
+| PHP        | 8.0             |
+| Laravel    | 9.0             |
+
+### Installation
+
 First, install the package via Composer as dev dependency:
 
 ```bash
