@@ -1,6 +1,6 @@
 <?php
 
-namespace VanOns\LaravelTranslationsSync\Console;
+namespace VanOns\LaravelTranslationsSync\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;

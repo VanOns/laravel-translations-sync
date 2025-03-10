@@ -3,7 +3,7 @@
 namespace VanOns\LaravelTranslationsSync;
 
 use Illuminate\Support\ServiceProvider;
-use VanOns\LaravelTranslationsSync\Console\SyncTranslations;
+use VanOns\LaravelTranslationsSync\Console\Commands\SyncTranslations;
 
 class LaravelTranslationsSyncServiceProvider extends ServiceProvider
 {
