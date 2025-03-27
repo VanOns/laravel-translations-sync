@@ -262,13 +262,16 @@ class GoogleSheetsService extends BaseSyncService
     {
         $translations = $translations
             ->mapWithKeys(function ($translations, $key) {
+                $translationKeyIndex = $this->headings->search($this->getBaseKey());
+                $translationKey = $translations[$translationKeyIndex];
+
                 foreach ($translations as $localeIndex => $value) {
                     $locale = $this->headings[$localeIndex];
 
                     // If the value is not for the base key, or for an allowed locale, override it with the
                     // original value from the provider.
                     if ($locale !== $this->getBaseKey() && !LaravelTranslationsSync::localeIsAllowed($locale)) {
-                        $translations[$localeIndex] = $this->translations[$key][$locale] ?? '';
+                        $translations[$localeIndex] = $this->translations->firstWhere($this->getBaseKey(), '=', $translationKey)[$locale] ?? '';
                     }
                 }
 
