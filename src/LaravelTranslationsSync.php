@@ -31,7 +31,7 @@ class LaravelTranslationsSync
      */
     public function localeIsAllowed(string $key): bool
     {
-        return in_array($key, $this->getLocales());
+        return in_array(strtolower($key), array_map('strtolower', $this->getLocales()));
     }
 
     /**
