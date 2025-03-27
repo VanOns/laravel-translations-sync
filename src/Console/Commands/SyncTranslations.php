@@ -112,7 +112,7 @@ class SyncTranslations extends Command
             ->mapWithKeys([$this->sync, 'mapSourceTranslation'])
             ->values();
 
-        $this->info(sprintf('Found %s translations locally', $translations->count()));
+        $this->line(sprintf('Found %s translations locally', $translations->count()));
 
         $this->localTranslations = $translations;
     }
@@ -121,7 +121,7 @@ class SyncTranslations extends Command
     {
         $translations = $this->sync->getTranslations();
 
-        $this->info(sprintf('Found %s translations at provider', $translations->count()));
+        $this->line(sprintf('Found %s translations at provider', $translations->count()));
 
         $this->providerTranslations = $translations;
     }
@@ -146,7 +146,7 @@ class SyncTranslations extends Command
 
         $allTranslations = $this->sync->parseAllTranslations($allTranslations, $this->localTranslations);
 
-        $this->info(sprintf('Found %s total translations', $allTranslations->count()));
+        $this->line(sprintf('Found %s total translations', $allTranslations->count()));
 
         $this->allTranslations = $allTranslations;
     }
