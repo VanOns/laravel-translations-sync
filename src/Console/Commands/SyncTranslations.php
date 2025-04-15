@@ -242,7 +242,8 @@ class SyncTranslations extends Command
             File::makeDirectory($directory, recursive: true);
         }
 
-        $filePath = sprintf('%s/%s.json', $directory, $locale);
+        $normalizedLocale = LaravelTranslationsSync::normalizeLocale($locale);
+        $filePath = sprintf('%s/%s.json', $directory, $normalizedLocale);
         $encoded = json_encode($lines, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         if (File::exists($filePath)) {
@@ -257,7 +258,8 @@ class SyncTranslations extends Command
      */
     protected function writePhp(string $locale, string $filename, array $lines): void
     {
-        $directory = sprintf('%s/%s', lang_path(), $locale);
+        $normalizedLocale = LaravelTranslationsSync::normalizeLocale($locale);
+        $directory = sprintf('%s/%s', lang_path(), $normalizedLocale);
 
         // The translation directory doesn't exist, so create it.
         if (!File::exists($directory)) {
