@@ -79,7 +79,7 @@ class LaravelTranslationsSync
             }
         }
 
-        $jsonPath = lang_path("$normalizedLocale.json");
+        $jsonPath = lang_path("{$normalizedLocale}.json");
         if (File::exists($jsonPath)) {
             $json = File::get($jsonPath);
             $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
