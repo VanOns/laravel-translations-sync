@@ -311,12 +311,6 @@ class SyncTranslations extends Command
                 $value = str_replace($quote, '\\' . $quote, $value);
             }
 
-            // Return an empty string if the value is empty. We do this to prevent empty translations
-            // from being added, so that in case of absence it always defaults to the default language's translation.
-            if (empty($value)) {
-                return '';
-            }
-
             $currentValue = "{$quote}{$value}{$quote},";
         }
 
