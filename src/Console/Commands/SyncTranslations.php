@@ -108,7 +108,6 @@ class SyncTranslations extends Command
     {
         $translations = collect(LaravelTranslationsSync::getAllTranslations())
             ->mapWithKeys(fn ($translation, $key) => lts_array_dot($translation, $key . $this->separator, $this->separator))
-            ->filter()
             ->mapWithKeys([$this->sync, 'mapSourceTranslation'])
             ->values();
 
