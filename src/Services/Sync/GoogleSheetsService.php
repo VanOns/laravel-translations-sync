@@ -145,7 +145,6 @@ class GoogleSheetsService extends BaseSyncService
                 fn ($translation) => $this->headings
                     ->map(fn ($heading, $key) => [$heading => $translation[$key] ?? null])
                     ->collapse()
-                    ->filter()
                     ->toArray()
             );
     }
