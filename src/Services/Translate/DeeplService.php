@@ -29,6 +29,7 @@ class DeeplService extends BaseTranslateService
     {
         $this->apiKey = config('translations-sync.translate_providers.deepl.api_key');
         $this->apiUrl = config('translations-sync.translate_providers.deepl.api_url');
+        $this->localeMap = config('translations-sync.translate_providers.deepl.locale_map', []);
 
         if (!$this->isEnabled()) {
             throw TranslateException::providerNotConfigured();
@@ -151,6 +152,13 @@ class DeeplService extends BaseTranslateService
         $translateCache = [];
 
         foreach ($translatable as $language => $translatables) {
+            $providerLocale = $this->resolveLocale($language);
+
+            if ($providerLocale === null) {
+                $this->warn("Skipping locale {$language} (mapped to null). To change this, edit 'translate_providers.deepl.locale_map' in your config.");
+                continue;
+            }
+
             $this->line("Translating translations for {$language}...");
 
             $translateCache[$language] = array_merge(
@@ -175,17 +183,17 @@ class DeeplService extends BaseTranslateService
                     continue;
                 }
 
-                $translated = $this->translate(array_column($chunk, 'prepared_translation'), $language);
+                $translated = $this->translate(array_column($chunk, 'prepared_translation'), $providerLocale);
+
+                if ($translated === null) {
+                    continue;
+                }
 
                 // Process the translations, cache them, and set them on the translations array.
                 foreach ($translated as $i => $result) {
                     $currentTranslation = $chunk[$i];
                     $baseTranslation = $currentTranslation['base_translation'];
                     $processedTranslation = $this->afterTranslating($result, $baseTranslation);
-
-                    if (!isset($translateCache[$language])) {
-                        $translateCache[$language] = [];
-                    }
 
                     $translateCache[$language][$baseTranslation] = $processedTranslation;
                     $translations[$currentTranslation['translation_index']][$currentTranslation['value_index']] = $processedTranslation;

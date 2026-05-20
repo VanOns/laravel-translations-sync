@@ -16,6 +16,8 @@ abstract class BaseTranslateService
 
     protected int $waitSeconds = 2;
 
+    protected array $localeMap = [];
+
     public function __construct()
     {
         $this->separator = LaravelTranslationsSync::getSeparator();
@@ -77,5 +79,23 @@ abstract class BaseTranslateService
     public function afterTranslating(string $value, string $original): string
     {
         return $value;
+    }
+
+    /**
+     * Resolve the locale using the locale map.
+     * If the locale is not in the map, it will be used as is.
+     * If the locale is mapped to null, it will be skipped entirely.
+     */
+    public function resolveLocale(string $locale): ?string
+    {
+        $normalizedLocale = strtolower($locale);
+
+        foreach ($this->localeMap as $key => $value) {
+            if (strtolower($key) === $normalizedLocale) {
+                return $value;
+            }
+        }
+
+        return $locale;
     }
 }
