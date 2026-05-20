@@ -114,6 +114,17 @@ return [
             'api_key' => env('LTS_DEEPL_API_KEY'),
             'api_url' => env('LTS_DEEPL_API_URL'),
 
+            /**
+             * Optional mapping from site locale to provider locale.
+             * Set a locale to `null` to skip translation for that locale entirely.
+             * If a locale is not in the mapping, it will be used as is.
+             *
+             * Example:
+             * 'de_CH' => 'de',
+             * 'fr_CH' => null,
+             */
+            'locale_map' => [],
+
         ],
 
     ],
