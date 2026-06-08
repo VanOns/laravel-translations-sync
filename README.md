@@ -36,8 +36,6 @@ You can execute the synchronization command by running:
 php artisan lang:sync
 ```
 
-See [Basic usage](docs/basic-usage.md) for more information.
-
 ## Documentation
 
 Please see the [documentation](docs) for detailed information about installation and usage.
