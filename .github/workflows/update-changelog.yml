@@ -31,5 +31,5 @@ jobs:
           commit-message: "chore: update CHANGELOG.md"
           title: "chore: update CHANGELOG.md for ${{ github.event.release.tag_name }}"
           body: "Automated changelog update for release ${{ github.event.release.tag_name }}"
-          labels: automated
+          labels: documentation
           delete-branch: true
