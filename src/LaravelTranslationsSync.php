@@ -2,9 +2,8 @@
 
 namespace VanOns\LaravelTranslationsSync;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use RecursiveArrayIterator;
-use RecursiveIteratorIterator;
 
 class LaravelTranslationsSync
 {
@@ -98,33 +97,11 @@ class LaravelTranslationsSync
         }
 
         if ($flat) {
-            $strings = $this->flattenArray($strings);
+            $strings = Arr::dot($strings);
         }
 
         ksort($strings, SORT_STRING | SORT_FLAG_CASE);
         return $strings;
-    }
-
-    private function flattenArray(array $array): array
-    {
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveArrayIterator($array),
-            RecursiveIteratorIterator::SELF_FIRST
-        );
-        $path = [];
-        $flatArray = [];
-
-        foreach ($iterator as $key => $value) {
-            $path[$iterator->getDepth()] = $key;
-
-            if (!is_array($value)) {
-                $flatArray[
-                implode('.', array_slice($path, 0, $iterator->getDepth() + 1))
-                ] = $value;
-            }
-        }
-
-        return $flatArray;
     }
 
     /**
