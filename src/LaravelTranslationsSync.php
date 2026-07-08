@@ -2,6 +2,7 @@
 
 namespace VanOns\LaravelTranslationsSync;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 
 class LaravelTranslationsSync
@@ -65,7 +66,7 @@ class LaravelTranslationsSync
     /**
      * Return the translations for a specific locale.
      */
-    public function getTranslationsForLocale(string $locale): array
+    public function getTranslationsForLocale(string $locale, bool $flat = false): array
     {
         $normalizedLocale = $this->normalizeLocale($locale);
         $strings = [];
@@ -73,7 +74,11 @@ class LaravelTranslationsSync
         // Load all translation files from the locale's directory.
         if (File::exists(lang_path($normalizedLocale))) {
             foreach (File::files(lang_path($normalizedLocale)) as $file) {
-                $name = basename($file);
+                if ($flat) {
+                    $name = basename($file, '.php');
+                } else {
+                    $name = basename($file);
+                }
                 $strings[$name] = require $file;
                 ksort($strings[$name], SORT_STRING | SORT_FLAG_CASE);
             }
@@ -82,10 +87,20 @@ class LaravelTranslationsSync
         $jsonPath = lang_path("{$normalizedLocale}.json");
         if (File::exists($jsonPath)) {
             $json = File::get($jsonPath);
-            $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
-            ksort($strings['json'], SORT_STRING | SORT_FLAG_CASE);
+            if ($flat) {
+                $jsonStrings = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
+                $strings = array_merge($strings, $jsonStrings);
+            } else {
+                $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
+                ksort($strings['json'], SORT_STRING | SORT_FLAG_CASE);
+            }
         }
 
+        if ($flat) {
+            $strings = Arr::dot($strings);
+        }
+
+        ksort($strings, SORT_STRING | SORT_FLAG_CASE);
         return $strings;
     }
 
