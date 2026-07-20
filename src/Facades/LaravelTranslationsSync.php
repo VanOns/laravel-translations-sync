@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static array getAllTranslations()
- * @method static array getTranslationsForLocale(string $locale)
+ * @method static array getTranslationsForLocale(string $locale, bool $flat = false)
  *
  * @mixin \VanOns\LaravelTranslationsSync\LaravelTranslationsSync
  */
