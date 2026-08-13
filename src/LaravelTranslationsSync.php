@@ -58,7 +58,7 @@ class LaravelTranslationsSync
     {
         $strings = $this->getTranslationsForLocale($this->getBaseLocale());
 
-        ksort($strings, SORT_STRING | SORT_FLAG_CASE);
+        ksort($strings, SORT_STRING);
 
         return $strings;
     }
@@ -80,7 +80,7 @@ class LaravelTranslationsSync
                     $name = basename($file);
                 }
                 $strings[$name] = require $file;
-                ksort($strings[$name], SORT_STRING | SORT_FLAG_CASE);
+                ksort($strings[$name], SORT_STRING);
             }
         }
 
@@ -92,7 +92,7 @@ class LaravelTranslationsSync
                 $strings = array_merge($strings, $jsonStrings);
             } else {
                 $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
-                ksort($strings['json'], SORT_STRING | SORT_FLAG_CASE);
+                ksort($strings['json'], SORT_STRING);
             }
         }
 
@@ -100,7 +100,7 @@ class LaravelTranslationsSync
             $strings = Arr::dot($strings);
         }
 
-        ksort($strings, SORT_STRING | SORT_FLAG_CASE);
+        ksort($strings, SORT_STRING);
         return $strings;
     }
 

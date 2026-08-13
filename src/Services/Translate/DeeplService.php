@@ -274,7 +274,7 @@ class DeeplService extends BaseTranslateService
             return;
         }
 
-        ksort($cache, SORT_STRING | SORT_FLAG_CASE);
+        ksort($cache, SORT_STRING);
 
         match (LaravelTranslationsSync::getCacheDriver()) {
             'file' => $this->saveFileCache($language, $cache),
