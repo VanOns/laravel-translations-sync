@@ -140,7 +140,7 @@ class SyncTranslations extends Command
             ->filter(
                 fn ($translation) => $this->sync->filterTargetTranslation($translation, $this->localTranslations)
             )
-            ->sortBy($this->sync->getBaseKey(), SORT_STRING)
+            ->sortBy($this->sync->getBaseKey(), LaravelTranslationsSync::getSortFlags())
             ->values();
 
         $allTranslations = $this->sync->parseAllTranslations($allTranslations, $this->localTranslations);
@@ -209,7 +209,7 @@ class SyncTranslations extends Command
 
             foreach ($files as $filename => $lines) {
                 // Sort the lines by key, alphabetically.
-                ksort($lines, SORT_STRING);
+                ksort($lines, LaravelTranslationsSync::getSortFlags());
 
                 if ($filename === 'json') {
                     $this->writeJson($locale, $lines);

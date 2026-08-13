@@ -181,4 +181,16 @@ return [
 
     'cache_driver' => env('LTS_CACHE_DRIVER', 'default'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Case Sensitive Sorting
+    |--------------------------------------------------------------------------
+    |
+    | Whether translation keys should be sorted case-sensitively (uppercase
+    | before lowercase) or case-insensitively (alphabetically, ignoring case).
+    |
+    */
+
+    'case_sensitive_sorting' => env('LTS_CASE_SENSITIVE_SORTING', false),
+
 ];
