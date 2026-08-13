@@ -58,7 +58,7 @@ class LaravelTranslationsSync
     {
         $strings = $this->getTranslationsForLocale($this->getBaseLocale());
 
-        ksort($strings, SORT_STRING | SORT_FLAG_CASE);
+        ksort($strings, $this->getSortFlags());
 
         return $strings;
     }
@@ -80,7 +80,7 @@ class LaravelTranslationsSync
                     $name = basename($file);
                 }
                 $strings[$name] = require $file;
-                ksort($strings[$name], SORT_STRING | SORT_FLAG_CASE);
+                ksort($strings[$name], $this->getSortFlags());
             }
         }
 
@@ -92,7 +92,7 @@ class LaravelTranslationsSync
                 $strings = array_merge($strings, $jsonStrings);
             } else {
                 $strings['json'] = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
-                ksort($strings['json'], SORT_STRING | SORT_FLAG_CASE);
+                ksort($strings['json'], $this->getSortFlags());
             }
         }
 
@@ -100,7 +100,7 @@ class LaravelTranslationsSync
             $strings = Arr::dot($strings);
         }
 
-        ksort($strings, SORT_STRING | SORT_FLAG_CASE);
+        ksort($strings, $this->getSortFlags());
         return $strings;
     }
 
@@ -126,5 +126,15 @@ class LaravelTranslationsSync
     public function getCacheDriver(): string
     {
         return config('translations-sync.cache_driver', 'default');
+    }
+
+    /**
+     * Return the sort flags to use when sorting translation keys.
+     */
+    public function getSortFlags(): int
+    {
+        return config('translations-sync.case_sensitive_sorting', false)
+            ? SORT_STRING
+            : SORT_STRING | SORT_FLAG_CASE;
     }
 }

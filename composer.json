@@ -30,8 +30,8 @@
         "phpstan/phpstan": "^1.12|^2.0"
     },
     "scripts": {
-        "fix": "vendor/bin/php-cs-fixer fix",
-        "analyse": "vendor/bin/phpstan analyse"
+        "analyse": "vendor/bin/phpstan analyse",
+        "fix": "vendor/bin/php-cs-fixer fix"
     },
     "autoload": {
         "files": [
