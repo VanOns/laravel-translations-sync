@@ -1,5 +1,3 @@
-# Sync
+# Translate
 
-## Contents
-
-1. [DeepL](deepl)
+1. [DeepL](deepl.md)
