@@ -2,9 +2,10 @@
 
 # Laravel Translations Sync
 
-[![Latest Version on Github](https://img.shields.io/github/release/VanOns/laravel-translations-sync.svg?style=flat-square)](https://github.com/VanOns/laravel-translations-sync/releases)
-[![Total Downloads](https://img.shields.io/packagist/dt/van-ons/laravel-translations-sync.svg?style=flat-square)](https://packagist.org/packages/van-ons/laravel-translations-sync)
-[![Github issues](https://img.shields.io/github/issues/VanOns/laravel-translations-sync?style=flat-square)](https://github.com/VanOns/laravel-translations-sync/issues)
+[![Tests](https://github.com/VanOns/laravel-translations-sync/actions/workflows/run-tests.yml/badge.svg)](https://github.com/VanOns/laravel-translations-sync/actions/workflows/run-tests.yml)
+[![Latest version on GitHub](https://img.shields.io/github/release/VanOns/laravel-translations-sync.svg?style=flat-square)](https://github.com/VanOns/laravel-translations-sync/releases)
+[![Total downloads](https://img.shields.io/packagist/dt/van-ons/laravel-translations-sync.svg?style=flat-square)](https://packagist.org/packages/van-ons/laravel-translations-sync)
+[![GitHub issues](https://img.shields.io/github/issues/VanOns/laravel-translations-sync?style=flat-square)](https://github.com/VanOns/laravel-translations-sync/issues)
 [![License](https://img.shields.io/github/license/VanOns/laravel-translations-sync?style=flat-square)](https://github.com/VanOns/laravel-translations-sync/blob/main/LICENSE.md)
 [![Plumb score](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fplumbphp.dev%2Fbadges%2Fvan-ons%2Flaravel-translations-sync%2Fcomposite.svg&search=%3Ctitle%3Eplumb%3A%5Cs%2A%28%5B%5E%3C%5D%2B%29%3C&replace=%241&label=plumb&style=flat-square)](https://plumbphp.dev/van-ons/laravel-translations-sync)
 
@@ -12,16 +13,9 @@ A package that synchronizes translations between your Laravel project and a prov
 
 ## Quick start
 
-### Requirements
-
-| Dependency | Minimum version |
-|------------|-----------------|
-| PHP        | 8.0             |
-| Laravel    | 9.0             |
-
 ### Installation
 
-First, install the package via Composer as dev dependency:
+First, install the package via Composer as a dev dependency:
 
 ```bash
 composer require van-ons/laravel-translations-sync --dev
@@ -41,17 +35,21 @@ You can execute the synchronization command by running:
 
 ```bash
 php artisan lang:sync
-````
-
-See [Basic usage](docs/basic-usage.md) for more information.
+```
 
 ## Documentation
 
-Please see the [documentation](docs/README.md) for detailed information about installation and usage.
+Please see the [documentation](docs) for detailed information about installation and usage.
 
 ## Contributing
 
 Please see [Contributing](CONTRIBUTING.md) for more information about how you can contribute.
+
+## Testing
+
+```bash
+composer test
+```
 
 ## Changelog
 
